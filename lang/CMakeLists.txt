@@ -172,7 +172,7 @@ endif(WIN32)
 
 if(SC_HIDAPI)
     list(APPEND sclang_sources LangPrimSource/SC_HID_api.cpp)
-	find_package(hidapi REQUIRED)
+	find_package(hidapi CONFIG REQUIRED)
     include_directories(
         ${CMAKE_SOURCE_DIR}/external_libraries/hidapi
     )
