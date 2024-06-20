@@ -163,6 +163,19 @@ jobs:
         run: sudo apt-get install --yes libboost-thread-dev libboost-system-dev libboost-filesystem-dev libboost-regex-dev libboost-test-dev libboost-program-options-dev libyaml-cpp-dev
       - name: install qt from apt
         run: sudo apt-get install qtbase5-dev qt5-qmake qttools5-dev qttools5-dev-tools qtdeclarative5-dev libqt5svg5-dev libqt5websockets5-dev qtwebengine5-dev
+      - name: install hidapi
+        shell: bash
+        run: |
+          cd $LIBS_DOWNLOAD_PATH
+          sudo apt-get install libusb-1.0-0-dev
+          curl -L https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.14.0.zip -o hidapi.zip
+          7z x hidapi.zip -y
+          mv hidapi-hidapi-0.14.0 $GITHUB_WORKSPACE/external_libraries/hidapi/hidapi
+          cd $GITHUB_WORKSPACE/external_libraries/hidapi/hidapi
+          mkdir build && cd build
+          cmake ..
+          cmake --build .
+          sudo cmake --build . --target install
       - name: configure
         run: |
           mkdir $BUILD_PATH && cd $BUILD_PATH
@@ -333,6 +346,8 @@ jobs:
       - name: install system libraries
         if: env.USE_SYSLIBS == 'true'
         run: brew install yaml-cpp boost@1.76
+      - name: install hidapi
+        run: brew install hidapi
       - name: install qt from homebrew
         if: matrix.cmake-architectures == 'x86_64' && !matrix.qt-version
         run: brew install qt@5
@@ -527,6 +542,9 @@ jobs:
         shell: bash
         run: |
           vcpkg install readline --triplet="${{ matrix.vcpkg-triplet }}" --overlay-triplets="$GITHUB_WORKSPACE/vcpkg/triplets"
+      - name: install hidapi
+        shell: bash
+        run: vcpkg install hidapi
       - name: configure
         shell: bash
         run: |
