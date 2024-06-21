@@ -319,7 +319,7 @@ if (FFTW3F_FOUND)
 endif()
 
 if (WIN32 AND SC_HIDAPI)
-	target_link_libraries(libsclang wsock32 ws2_32 portmidi iphlpapi hidapi::windows)
+	target_link_libraries(libsclang wsock32 ws2_32 portmidi iphlpapi hidapi::winapi)
 elseif(WIN32)
 	target_link_libraries(libsclang wsock32 ws2_32 portmidi iphlpapi)
 endif()
