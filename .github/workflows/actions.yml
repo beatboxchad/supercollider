@@ -544,7 +544,7 @@ jobs:
           vcpkg install readline --triplet="${{ matrix.vcpkg-triplet }}" --overlay-triplets="$GITHUB_WORKSPACE/vcpkg/triplets"
       - name: install hidapi
         shell: bash
-        run: vcpkg install hidapi
+        run: vcpkg install hidapi --triplet="${{ matrix.vcpkg-triplet }}" --overlay-triplets="$GITHUB_WORKSPACE/vcpkg/triplets"
       - name: configure
         shell: bash
         run: |
