@@ -457,7 +457,7 @@ jobs:
             os-version: '2019'
             qt-version: '5.15.2'
             qt-arch: 'win64_mingw81'
-            vcpkg-triplet: 'x64-mingw-dynamic'
+            vcpkg-triplet: 'x64-mingw-static'
             fftw-url: 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.5-dll64.zip'
             cmake-generator: 'MinGW Makefiles'
             chocolatey-options: '' # '--forcex86' for 32-bit build
